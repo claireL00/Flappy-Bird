@@ -1,5 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
 
-<body style="height:100vh; background:#111; text-align: center;">
-    <canvas style="border:2px solid skyblue;" id="canvas" width="400" height="400"></canvas>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+    <title>Flappy Bird</title>
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            min-height: 100vh;
+            min-height: 100dvh;
+            padding: 16px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 16px;
+            background: #111;
+            color: #eee;
+            font-family: "Courier New", monospace;
+            text-align: center;
+            overflow: hidden;
+            touch-action: manipulation;
+            -webkit-user-select: none;
+            user-select: none;
+        }
+
+        h1 {
+            margin: 0;
+            font-size: clamp(20px, 5vmin, 32px);
+            letter-spacing: 2px;
+            color: skyblue;
+        }
+
+        .game {
+            position: relative;
+            width: min(92vw, 60vh, 400px);
+            aspect-ratio: 1 / 1;
+        }
+
+        #canvas {
+            border: 2px solid skyblue;
+            border-radius: 4px;
+            display: block;
+            width: 100%;
+            height: 100%;
+            cursor: pointer;
+        }
+
+        .overlay {
+            position: absolute;
+            inset: 2px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            border-radius: 2px;
+            background: rgb(0 0 0 / 70%);
+        }
+
+        .overlay[hidden] {
+            display: none;
+        }
+
+        .overlay h2,
+        .overlay p {
+            margin: 0;
+        }
+
+        .overlay h2 {
+            color: #ffdf4d;
+            font-size: clamp(24px, 8vmin, 42px);
+        }
+
+        .overlay button {
+            padding: 10px 18px;
+            border: 0;
+            border-radius: 5px;
+            background: #ffdf4d;
+            color: #111;
+            font: bold 16px "Courier New", monospace;
+            cursor: pointer;
+        }
+
+        .overlay button:hover,
+        .overlay button:focus-visible {
+            background: white;
+        }
+
+        .controls {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 8px 16px;
+            max-width: min(92vw, 400px);
+            font-size: clamp(11px, 2.6vmin, 14px);
+        }
+
+        .controls div {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            white-space: nowrap;
+        }
+
+        kbd {
+            padding: 3px 8px;
+            border: 1px solid #555;
+            border-bottom-width: 3px;
+            border-radius: 4px;
+            background: #222;
+            font: inherit;
+            font-size: 0.9em;
+            color: #eee;
+        }
+
+        /* Landscape phones: sit the controls beside the canvas so the game stays large */
+        @media (orientation: landscape) and (max-height: 480px) {
+            body {
+                flex-direction: row;
+                gap: 24px;
+            }
+
+            h1 {
+                display: none;
+            }
+
+            .controls {
+                flex-direction: column;
+                max-width: none;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <h1>FLAPPY BIRD</h1>
+    <div class="game">
+        <canvas id="canvas" width="400" height="400"></canvas>
+        <div class="overlay" id="start-screen">
+            <h2>FLAPPY BIRD</h2>
+            <button id="start" type="button">Start</button>
+        </div>
+        <div class="overlay" id="game-over" hidden>
+            <h2>GAME OVER</h2>
+            <p>Score: <strong id="final-score">0</strong></p>
+            <p>Best: <strong id="final-best">0</strong></p>
+            <button id="restart" type="button">Start Again</button>
+        </div>
+    </div>
+    <div class="controls">
+        <div><kbd>Space</kbd> <span>Flap</span></div>
+        <div><kbd>&uarr;</kbd> <span>Flap</span></div>
+        <div><kbd>Click</kbd> <span>Flap</span></div>
+        <div><kbd>Tap</kbd> <span>Flap</span></div>
+    </div>
     <script src="index.js"> </script>
 </body>
+
+</html>
